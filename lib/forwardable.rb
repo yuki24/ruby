@@ -204,7 +204,7 @@ module Forwardable
       mesg = "#{Module === obj ? obj : obj.class}\##{ali} at #{loc.path}:#{loc.lineno} forwarding to private method "
       method_call = "#{<<-"begin;"}\n#{<<-"end;".chomp}"
         begin;
-          unless ::Kernel.instance_method(:respond_to?).bind(_).call(:"#{method}")
+          unless defined?(_.#{method})
             ::Kernel.warn "\#{caller_locations(1)[0]}: "#{mesg.dump}"\#{_.class}"'##{method}'
             _#{method_call}
           else
